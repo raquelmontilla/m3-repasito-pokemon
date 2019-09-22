@@ -2,13 +2,16 @@ import React from 'react';
 import './App.css';
 import { fetchPokemon } from './service/fetchPokemones';
 import PokeList from './components/PokeList';
+import Filters from './components/Filters';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pokemones: []
+      pokemones: [],
+      query: ''
     }
+    this.getUserQuery = this.getUserQuery.bind(this);
   }
 
   componentDidMount() {
@@ -24,15 +27,29 @@ class App extends React.Component {
       })
   }
 
+  getUserQuery(event) {
+    const query = event.currentTarget.value;
+    this.setState({
+      query: query
+    })
+  }
+
   render() {
-    const { pokemones } = this.state;
+    const { pokemones, query } = this.state;
     return (
       <div className='app' >
         <h1 className='app__title'>Mi lista de Pokemones</h1>
-        < PokeList pokemones={pokemones} />
+        < label > Buscador: </label>
+        <Filters
+          getUserQuery={this.getUserQuery}
+          query={query} />
+
+        < PokeList
+          pokemones={pokemones}
+          query={query} />
 
 
-      </div>
+      </div >
     );
   }
 }
