@@ -1,8 +1,10 @@
 import React from 'react';
 import './App.css';
 import { fetchPokemon } from './service/fetchPokemones';
-import PokeList from './components/PokeList';
-import Filters from './components/Filters';
+import { Switch, Route } from 'react-router-dom';
+import Home from './components/Home';
+import PokeDetail from './components/PokeDetail';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -39,19 +41,26 @@ class App extends React.Component {
     return (
       <div className='app' >
         <h1 className='app__title'>Mi lista de Pokemones</h1>
-        < label > Buscador: </label>
-        <Filters
-          getUserQuery={this.getUserQuery}
-          query={query} />
 
-        < PokeList
-          pokemones={pokemones}
-          query={query} />
+        <Switch>
+          <Route render={() => {
+            return (
+              <Home exact path='/'
+                getUserQuery={this.getUserQuery}
+                query={query}
+                pokemones={pokemones}
+              />
+            )
+          }} />
+          <Route path='/poke-detail'
+            component={PokeDetail} />
 
+        </Switch>
 
       </div >
     );
   }
+
 }
 
 export default App;
