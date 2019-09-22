@@ -43,9 +43,9 @@ class App extends React.Component {
         <h1 className='app__title'>Mi lista de Pokemones</h1>
 
         <Switch>
-          <Route render={() => {
+          <Route exact path='/' render={() => {
             return (
-              <Home exact path='/'
+              <Home
                 getUserQuery={this.getUserQuery}
                 query={query}
                 pokemones={pokemones}
