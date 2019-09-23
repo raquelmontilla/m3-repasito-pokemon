@@ -5,29 +5,20 @@ import PropTypes from 'prop-types';
 const PokeDetail = props => {
   const { routerProps, pokemones } = props;
   const pokeId = parseInt(routerProps.match.params.pokeId)
-  const pokemon = pokemones.filter(item => item.id === pokeId);
+  const pokemon = pokemones.filter(item => { return item.id === pokeId });
 
-  const { name, url, types } = pokemon[0];
+  console.log(pokemon[0])
+
   return (
-
     <Fragment>
       <div className="poke-detail">
-        <h2 className="poke-detail__name">{name}</h2>
-        <div className="poke-detail__img">
-          <img src={url} alt={name} />
-        </div>
-        <ul className="poke-detail__types">
-          {types.map((type, index) => {
-            return (
-              <li className="poke-detail__type" key={index}>{type}</li>
-            );
-          })}
-        </ul>
+        <h2 className="poke-detail__name">{pokemon[0].name}</h2>
       </div>
-    
-  );
-  
-  <Link to='/' className='app__back'>Volver al listado</Link>
+      <div className="poke-detail__name">
+        <img src={pokemon[0].url} alt={pokemon[0].name} />
+      </div>
+
+      <Link to='/' className='app__back'>Volver al listado</Link>
     </Fragment >
   )
 }
