@@ -52,8 +52,15 @@ class App extends React.Component {
               />
             )
           }} />
-          <Route path='/poke-detail'
-            component={PokeDetail} />
+          <Route path='/poke-detail/:pokeId' render={routerProps => {
+            return (
+              <PokeDetail
+                routerProps={routerProps}
+                pokemones={pokemones}
+              />
+            )
+          }}
+          />
 
         </Switch>
 
